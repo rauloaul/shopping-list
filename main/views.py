@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login')
 def show_main(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(user=request.user)
 
     context = {
         'name': request.user.username,
