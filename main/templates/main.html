@@ -1,13 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Shopping List Page</h1>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    html * {
+        font-family: 'Poppins', sans-serif;
+    }
+    table, td, th {
+      border: 2px solid black;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td {
+      text-align: center;
+      padding: 5px;
+      background-color: rgb(231, 231, 231);
+    }
+    th {
+      text-align: center;
+      padding: 5px;
+      background-color: rgb(201, 218, 255);
+    }
+    body {
+        background-color: rgb(255, 255, 255);
+        margin: 20px;
+        padding: 10px;
+    }
+    h1, h5, p {
+        margin: 5px 0;
+    }
+    </style>
+
+    <h1 align="center">Shopping List Page</h1>
 
     <h5>Name:</h5>
-    <p>{{name}}</p>
+    <p style="padding-left: 30px;">{{name}}</p>
 
     <h5>Class:</h5>
-    <p>{{class}}</p>
+    <p style="padding-left: 30px;">{{class}}</p>
 
 <table>
     <tr>
@@ -15,6 +48,7 @@
         <th>Price</th>
         <th>Description</th>
         <th>Date Added</th>
+        <th>Action</th>
     </tr>
 
     {% comment %} Below is how to show the product data {% endcomment %}
@@ -25,6 +59,19 @@
             <td>{{product.price}}</td>
             <td>{{product.description}}</td>
             <td>{{product.date_added}}</td>
+            <td>
+                <a href="{% url 'main:edit_product' product.pk %}">
+                <button>
+                    Edit
+                </button>
+                </a>
+
+                <a href="{% url 'main:delete_product' product.pk %}">
+                      <button>
+                          Delete
+                      </button>
+                  </a>
+            </td>
         </tr>
     {% endfor %}
 </table>
